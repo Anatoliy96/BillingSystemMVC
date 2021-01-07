@@ -16,6 +16,11 @@ namespace BillingSystemMVC.BLL
             ProfileDAO profileDao = new ProfileDAO();
             return profileDao.Details(id);
         }
+        public Profile GetProfile(string Name)
+        {
+            BillingSystemContext context = new BillingSystemContext();
+            return context.Profiles.FirstOrDefault(p => p.Name == Name);
+        }
         public Profiles GetProfiles()
         {
             ProfileDAO profileDao = new ProfileDAO();
