@@ -1,0 +1,50 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-md-6">
+        <p>Операции с клиенти</p>
+    </div>
+    <div class="row">
+        <div>
+            <input type="button"
+                   value="Добави клиент"
+                   onclick="location.href='@Url.Action("AddClient", "Clients" )'" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            Търси клиенти по лична инф.
+        </div>
+        <div>
+            @using (Html.BeginForm("ViewFilteredClients", "Clients", FormMethod.Get))
+            {
+            <select name="filtertype" id="filtertype">
+                <option value="name">Име</option>
+                <option value="address">Адрес</option>
+                <option value="PhoneNumber">Телефон</option>
+                <option value="IPAdress">IP Adress</option>
+                <option value="comment">Коментар</option>
+            </select>
+                <input type="text" name="filter" id="filter" />
+                <input type="submit" value="Търси" />
+            }
+        </div>
+        <div>
+            @Html.ActionLink("Всички клиенти", "ViewAllClients", "Clients")
+        </div>
+    </div>
+    <div class="col-md-6">
+        Търси клиенти по статус и зона
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+﻿@model BillingSystemMVC.Model.Profile
+
+@{
+    ViewData["Title"] = "UpdateProfile";
+}
+
+<h1>UpdateProfile</h1>
+
+<h4>Профил</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("UpdateProfile", "Profile"))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label"></label>
+            <input asp-for="UserName" class="form-control" name="UserName" value="@Model.UserName" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserNameType" class="control-label"></label>
+            <input asp-for="UserNameType" class="form-control" name="UserNameType" value="@Model.UserNameType"/>
+            <span asp-validation-for="UserNameType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" name="Password" value="@Model.Password"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <input asp-for="PhoneNumber" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber"/>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" name="Name" value="@Model.Name"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IDNumber" class="control-label"></label>
+            <input asp-for="IDNumber" class="form-control" name="IDNumber" />
+            <span asp-validation-for="IDNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

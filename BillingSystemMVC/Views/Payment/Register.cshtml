@@ -1,0 +1,23 @@
+﻿@model BillingSystemMVC.Model.Payment
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Плащане</h1>
+
+@using (Html.BeginForm("Register", "Payment"))
+{
+    <div class="mb-3">
+        <input type="hidden" asp-for="Client" value="@Model.Client" />
+        <label for="Amount" class="form-label">Сума</label>
+        <input type="number" asp-for="Amount" class="form-control" id="exampleFormControlInput1" placeholder="Amount">
+        <input type="submit" value="Плащане" />
+    </div>
+
+}
+
+
+
+
+

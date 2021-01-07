@@ -1,0 +1,52 @@
+﻿@model BillingSystemMVC.BLL.Model.ZonesAndTariffs
+@{
+    ViewData["Title"] = "AddClient";
+}
+
+<h1>AddClient</h1>
+@using (Html.BeginForm("AddClient", "Clients"))
+{
+    <div class="form-group">
+        <label for="exampleInputName">Трите имена</label>
+        <input type="text" class="form-control" id="ClientName" name="ClientName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputAddress">Адрес</label>
+        <input type="text" class="form-control" id="Address" name="Address">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPhoneNumber">Телефон</label>
+        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="tariff">Тарифа</label>
+        <select class="form-control" id="tariff" name="tariff">
+            @foreach (var t in Model.Tariffs)
+            {
+                <option>
+                    @t.Name
+                </option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="zones">Зона</label>
+        <select class="form-control" id="zones" name="Zone">
+            @foreach (var z in Model.Zones)
+            {
+                <option>
+                    @z.Town
+                </option>
+            }
+        </select>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="PonClient">
+        <label class="form-check-label" for="Pon">Пон Клиент</label>
+    </div>
+    <div class="form-group">
+        <label for="comment">Коментар</label>
+        <input type="text" class="form-control" id="Comment" name="Comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

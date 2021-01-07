@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BillingSystemMVC.Model.Client>
+@{
+    ViewData["Title"] = "ViewAllClients";
+}
+
+<h1>Преглед на клиенти</h1>
+
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Номер</th>
+            <th scope="col">Име</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Зона</th>
+            <th scope="col">IP Адреси</th>
+            <th scope="col">Валидност</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Коментар</th>
+            <th scope="col">Включен</th>
+            <th scope="col">Тарифа</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.IDNumber </td>
+                <td>@Html.ActionLink(c.Name, "ClientDetails", "Clients", new { id = c.IDNumber })</td>
+                <td>@c.Adress</td>
+                <td>@c.ZoneId</td>
+                <td>@c.IPAdress</td>
+                <td>@c.Validity</td>
+                <td>@c.Status</td>
+                <td>@c.Comment</td>
+                <td>@c.Included</td>
+                <td>@c.TariffId</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

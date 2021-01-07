@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BillingSystemMVC.BLL.Model.Profiles>
+@{
+    ViewData["Title"] = "AddProfile";
+}
+
+<h1>AddProfile</h1>
+@using (Html.BeginForm("AddProfile", "Profile"))
+{
+<form>
+    <div class="form-group">
+        <label for="exampleInputUserName">UserName</label>
+        <input type="text" class="form-control" id="UserName" name="UserName" aria-describedby="UserName">
+    </div>
+    <div class="form-group">
+        <label for="UserNameType">UserNameType</label>
+        <input type="text" class="form-control" id="UserNameType"  name="UserNameType" aria-describedby="UserNameType">
+    </div>
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" name="Password" id="Password">
+    </div>
+    <div class="form-group">
+        <label for="PhoneNumber">Телефонен номер</label>
+        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" aria-describedby="PhoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="Name">Име</label>
+        <input type="text" class="form-control" id="Name" name="Name" aria-describedby="Name">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+}
