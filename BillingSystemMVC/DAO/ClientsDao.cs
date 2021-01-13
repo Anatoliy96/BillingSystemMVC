@@ -1,5 +1,6 @@
 ﻿using BillingSystemMVC.Controllers;
 using BillingSystemMVC.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace BillingSystemMVC.DAO
             // Create an instance of the context
             BillingSystemContext context = new BillingSystemContext();
             // Get the clients and return them
-            return context.Clients.ToList();
+            return context.Clients.Include(c => c.ClientTarif).Include(c => c.ClientZone).ToList();
         }
 
         public List<Client> GetActiveClients()

@@ -22,18 +22,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Анатолий Дудиев</td>
-                <td>Чемшир 9</td>
-                <td>Храбрино</td>
-                <td>91.92.73.40</td>
-                <td>2020-05-10 15:30:00</td>
-                <td>Активен</td>
-                <td>VIP</td>
-                <td>2020-04-10 15:30:00</td>
-                <td>1</td>
-                <
-            </tr>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@c.IDNumber</td>
+                    <td>@c.Adress</td>
+                    <td>@c.ZoneId</td>
+                    <td>@c.IPAdress</td>
+                    <td>@c.Validity</td>
+                    <td>@c.Status</td>
+                    <td>@c.Comment</td>
+                    <td>@c.Included</td>
+                    <td>@c.TariffId</td>
+                </tr>
+            }
+           
         </tbody>
     </table>
