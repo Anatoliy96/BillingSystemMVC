@@ -27,6 +27,12 @@ namespace BillingSystemMVC.Controllers
             return View(clientsBLL.GetActiveClients());
         }
 
+        public IActionResult InActiveClients()
+        {
+            ClientsBLL clientsBLL = new ClientsBLL();
+            return View(clientsBLL.GetInActiveClients());
+        }
+
         public IActionResult ViewAllClients()
         {
             ClientsDao dao = new ClientsDao();
