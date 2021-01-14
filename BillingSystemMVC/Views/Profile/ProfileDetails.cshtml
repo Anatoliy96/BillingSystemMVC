@@ -2,49 +2,49 @@
 
 @{
     ViewData["Title"] = "ProfileDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Информация за профила</h1>
+<h1>Детайли за профила</h1>
 
 <div>
     <h4>Профил</h4>
-    
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UserName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UserName)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UserNameType)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UserNameType)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Password)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IDNumber)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IDNumber)
         </dd>
     </dl>
@@ -53,8 +53,8 @@
     @Html.ActionLink("Промени профил", "UpdateProfile", "Profile", new { IDNumber = Model.IDNumber }) |
     @using (Html.BeginForm("DeleteProfile", "Profile", new { IDNumber = Model.IDNumber }))
     {
-        <input type="submit" value="Изтрий профила" 
-        onclick="return confirm('Сигурен ли сте,че искате да изтриете профила?');"/>
+        <input type="submit" value="Изтрий профила"
+               onclick="return confirm('Сигурен ли сте,че искате да изтриете профила?');" />
     }
     <a asp-action="Index">Back to List</a>
 </div>
