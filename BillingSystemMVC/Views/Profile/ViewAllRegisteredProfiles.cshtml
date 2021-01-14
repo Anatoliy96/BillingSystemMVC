@@ -16,12 +16,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>parvenec</td>
-            <td>Admin</td>
-            <td>Анатолий</td>
-            <td>0894511905</td>
-        </tr>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@p.UserName</td>
+                <td>@p.UserNameType</td>
+                <td>@p.Name</td>
+                <td>@p.PhoneNumber</td>
+            </tr>
+        }
+        
     </tbody>
 </table>

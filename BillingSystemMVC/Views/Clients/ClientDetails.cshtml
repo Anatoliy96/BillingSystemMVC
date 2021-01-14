@@ -5,92 +5,92 @@
 }
 
 <h1>Информация за клиента</h1>
+    <div>
+        <h4>Клиент</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Adress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Adress)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ZoneId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ZoneId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IPAdress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IPAdress)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Validity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Validity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Comment)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Comment)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Included)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Included)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TariffId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TariffId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IDNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IDNumber)
+            </dd>
+            <dt class="col-sm-2">
+                Регистрирай плащане
+            </dt>
+            <dd class="col-sm-10">
+                @Html.ActionLink("Плати", "Register", "Payment", new { ClientId = Model.IDNumber })
+            </dd>
 
-<div>
-    <h4>Клиент</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Adress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Adress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZoneId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZoneId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IPAdress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IPAdress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Validity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Validity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Comment)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Comment)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Included)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Included)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TariffId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TariffId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IDNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IDNumber)
-        </dd>
-        <dt class="col-sm-2">
-            Регистрирай плащане
-        </dt>
-        <dd class="col-sm-10">
-            @Html.ActionLink("Плати", "Register", "Payment", new { ClientId = Model.IDNumber })
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Редактиране", "UpdateClient", "Clients", new { IDNumber = Model.IDNumber })
-    |
-    @using (Html.BeginForm("DeleteClient", "Clients", new { IDNumber = Model.IDNumber }))
-    {
-        <input type="submit" value="Изтрий клиента"
-               onclick="return confirm('Сигурен ли сте,че искате да изтриете клиента?');" />
-    }
-    <a asp-action="Index">Back to List</a>
-</div>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Редактиране", "UpdateClient", "Clients", new { IDNumber = Model.IDNumber })
+        |
+        @using (Html.BeginForm("DeleteClient", "Clients", new { IDNumber = Model.IDNumber }))
+        {
+            <input type="submit" value="Изтрий клиента"
+                   onclick="return confirm('Сигурен ли сте,че искате да изтриете клиента?');" />
+        }
+        <a asp-action="Index">Back to List</a>
+    </div>
