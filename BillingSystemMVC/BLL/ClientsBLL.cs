@@ -12,10 +12,60 @@ namespace BillingSystemMVC.BLL
 {
     public class ClientsBLL
     {
-        public Client GetClient(int ID)
+        public List<ClientStatusDTO> GetAll()
+        {
+            BillingSystemContext context = new BillingSystemContext();
+            List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach(Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
+        }
+
+        public ClientStatusDTO GetClient(int ID)
         {
             ClientsDao clientsDao = new ClientsDao();
-           return clientsDao.Details(ID);
+            Client client = clientsDao.Details(ID);
+            ClientStatusDTO clientDto = new ClientStatusDTO();
+            clientDto.Adress = client.Adress;
+            clientDto.ClientTarif = client.ClientTarif;
+            clientDto.ClientZone = client.ClientZone;
+            clientDto.Comment = client.Comment;
+            clientDto.IDNumber = client.IDNumber;
+            clientDto.Included = client.Included;
+            clientDto.IPAdress = client.IPAdress;
+            clientDto.Name = client.Name;
+            clientDto.PhoneNumber = client.PhoneNumber;
+            clientDto.Validity = client.Validity;
+
+           return clientDto;
         }
         public enum ClientFilterType
         {
@@ -62,90 +112,427 @@ namespace BillingSystemMVC.BLL
             dao.Insert(client);
         }
 
-        public List<Client> GetFilteredClients(ClientFilterType FilterType, string Filter)
+        public List<ClientStatusDTO> GetFilteredClients(ClientFilterType FilterType, string Filter)
         {
 
             if (FilterType == ClientFilterType.Name)
             {
-                return FilterByName(Filter);
+                BillingSystemContext context = new BillingSystemContext();
+                List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+                foreach (Client c in clients)
+                {
+                    ClientStatusDTO newClient = new ClientStatusDTO();
+                    newClient.Adress = c.Adress;
+                    newClient.ClientTarif = c.ClientTarif;
+                    newClient.ClientZone = c.ClientZone;
+                    newClient.Comment = c.Comment;
+                    newClient.IDNumber = c.IDNumber;
+                    newClient.Included = c.Included;
+                    newClient.IPAdress = c.IPAdress;
+                    newClient.Name = c.Name;
+                    newClient.PhoneNumber = c.PhoneNumber;
+                    newClient.Validity = c.Validity;
+
+                    if (newClient.Validity >= DateTime.Now)
+                    {
+                        newClient.Status = "ACTIVE";
+                    }
+                    else
+                    {
+                        newClient.Status = "INACTIVE";
+                    }
+                    clientsDTO.Add(newClient);
+                }
+                FilterByName(Filter);
+                return clientsDTO;
+                
             }
             else if (FilterType == ClientFilterType.Address)
             {
-                return FilterByAddress(Filter);
+                BillingSystemContext context = new BillingSystemContext();
+
+                List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+
+                foreach (Client c in clients)
+                {
+                    ClientStatusDTO newClient = new ClientStatusDTO();
+                    newClient.Adress = c.Adress;
+                    newClient.ClientTarif = c.ClientTarif;
+                    newClient.ClientZone = c.ClientZone;
+                    newClient.Comment = c.Comment;
+                    newClient.IDNumber = c.IDNumber;
+                    newClient.Included = c.Included;
+                    newClient.IPAdress = c.IPAdress;
+                    newClient.Name = c.Name;
+                    newClient.PhoneNumber = c.PhoneNumber;
+                    newClient.Validity = c.Validity;
+
+                    if (newClient.Validity >= DateTime.Now)
+                    {
+                        newClient.Status = "ACTIVE";
+                    }
+                    else
+                    {
+                        newClient.Status = "INACTIVE";
+                    }
+                    clientsDTO.Add(newClient);
+                }
+                FilterByAddress(Filter);
+                return clientsDTO;
             }
             else if (FilterType == ClientFilterType.PhoneNumber)
             {
-                return FilterByPhoneNumber(Filter);
+                BillingSystemContext context = new BillingSystemContext();
+
+                List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+
+                foreach (Client c in clients)
+                {
+                    ClientStatusDTO newClient = new ClientStatusDTO();
+                    newClient.Adress = c.Adress;
+                    newClient.ClientTarif = c.ClientTarif;
+                    newClient.ClientZone = c.ClientZone;
+                    newClient.Comment = c.Comment;
+                    newClient.IDNumber = c.IDNumber;
+                    newClient.Included = c.Included;
+                    newClient.IPAdress = c.IPAdress;
+                    newClient.Name = c.Name;
+                    newClient.PhoneNumber = c.PhoneNumber;
+                    newClient.Validity = c.Validity;
+
+                    if (newClient.Validity >= DateTime.Now)
+                    {
+                        newClient.Status = "ACTIVE";
+                    }
+                    else
+                    {
+                        newClient.Status = "INACTIVE";
+                    }
+                    clientsDTO.Add(newClient);
+                }
+                FilterByPhoneNumber(Filter);
+                return clientsDTO;
+                
             }
             else if (FilterType == ClientFilterType.IPAdress)
             {
-                return FilterByIPAdress(Filter);
+                BillingSystemContext context = new BillingSystemContext();
+
+                List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+
+                foreach (Client c in clients)
+                {
+                    ClientStatusDTO newClient = new ClientStatusDTO();
+                    newClient.Adress = c.Adress;
+                    newClient.ClientTarif = c.ClientTarif;
+                    newClient.ClientZone = c.ClientZone;
+                    newClient.Comment = c.Comment;
+                    newClient.IDNumber = c.IDNumber;
+                    newClient.Included = c.Included;
+                    newClient.IPAdress = c.IPAdress;
+                    newClient.Name = c.Name;
+                    newClient.PhoneNumber = c.PhoneNumber;
+                    newClient.Validity = c.Validity;
+
+                    if (newClient.Validity >= DateTime.Now)
+                    {
+                        newClient.Status = "ACTIVE";
+                    }
+                    else
+                    {
+                        newClient.Status = "INACTIVE";
+                    }
+                    clientsDTO.Add(newClient);
+                }
+                FilterByIPAdress(Filter);
+                return clientsDTO;
+                
             }
             else if (FilterType == ClientFilterType.comment)
             {
-                return FilterByComment(Filter);
+                BillingSystemContext context = new BillingSystemContext();
+
+                List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+
+                foreach (Client c in clients)
+                {
+                    ClientStatusDTO newClient = new ClientStatusDTO();
+                    newClient.Adress = c.Adress;
+                    newClient.ClientTarif = c.ClientTarif;
+                    newClient.ClientZone = c.ClientZone;
+                    newClient.Comment = c.Comment;
+                    newClient.IDNumber = c.IDNumber;
+                    newClient.Included = c.Included;
+                    newClient.IPAdress = c.IPAdress;
+                    newClient.Name = c.Name;
+                    newClient.PhoneNumber = c.PhoneNumber;
+                    newClient.Validity = c.Validity;
+
+                    if (newClient.Validity >= DateTime.Now)
+                    {
+                        newClient.Status = "ACTIVE";
+                    }
+                    else
+                    {
+                        newClient.Status = "INACTIVE";
+                    }
+                    clientsDTO.Add(newClient);
+                }
+                FilterByComment(Filter);
+                return clientsDTO;
+                
             }
             throw new InvalidEnumArgumentException("No such filter type.");
         }
 
-        private List<Client> FilterByName(string Name)
+        private List<ClientStatusDTO> FilterByName(string Name)
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.Name.ToLower().Contains(Name.ToLower())).ToList();
+            
+            List<Client> clients = context.Clients
+                .Include(c => c.ClientZone)
+                .Include(c => c.ClientTarif)
+                .Where(c => c.Name.ToLower().Contains(Name.ToLower()))
+                .ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
+             
+           
         }
 
-        private List<Client> FilterByAddress(string Address)
+        private List<ClientStatusDTO> FilterByAddress(string Address)
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.Adress.ToLower().Contains(Address.ToLower())).ToList();
+            
+
+            List<Client> clients = context.Clients.Include(c => c.ClientZone).Include(c => c.ClientTarif)
+                .Where(c => c.Adress.ToLower()
+                .Contains(Address.ToLower())).ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
         }
 
-        private List<Client> FilterByPhoneNumber(string PhoneNumber)
+        private List<ClientStatusDTO> FilterByPhoneNumber(string PhoneNumber)
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.PhoneNumber.Contains(PhoneNumber)).ToList();
+            
+
+            List<Client> clients = context.Clients.Include(c => c.ClientZone).Include(c => c.ClientTarif)
+                .Where(c => c.PhoneNumber
+                .Contains(PhoneNumber)).ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
         }
 
-        private List<Client> FilterByIPAdress(string IPAdress)
+        private List<ClientStatusDTO> FilterByIPAdress(string IPAdress)
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.IPAdress.Contains(IPAdress)).ToList();
+            
+
+            List<Client> clients = context.Clients.Include(c => c.ClientZone).Include(c => c.ClientTarif)
+                .Where(c => c.IPAdress
+                .Contains(IPAdress)).ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
         }
 
-        private List<Client> FilterByComment(string Comment)
+        private List<ClientStatusDTO> FilterByComment(string Comment)
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.Comment.ToLower().Contains(Comment.ToLower())).ToList();
+            
+
+            List<Client> clients = context.Clients.Include(c => c.ClientZone).Include(c => c.ClientTarif)
+                .Where(c => c.Comment.ToLower()
+                .Contains(Comment.ToLower())).ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
         }
 
         public void UpdateClient(
             string Name,
             string Adress,
             string PhoneNumber,
-            int ZoneId,
-            int TariffId,
+            int ClientZone,
+            int ClientTariff,
             string PonClient,
             string Comment,
             int IDNumber)
         {
             BillingSystemContext context = new BillingSystemContext();
-            //int zone = context.Zones.FirstOrDefault(z => z.Town == ZoneId).IDNumber;
-            //int tariff = context.Tariffs.FirstOrDefault(t => t.Name == TariffId).IDNumber;
+            
 
             Client client = new Client()
+
             {
                 Name = Name,
                 Adress = Adress,
                 PhoneNumber = PhoneNumber,
-                ZoneId = ZoneId,
-                TariffId = TariffId,
+                ZoneId = ClientZone,
+                TariffId = ClientTariff,
                 Comment = Comment,
                 IDNumber = IDNumber
 
             };
-
+            
             ClientsDao dao = new ClientsDao();
             dao.Update(client);
+            
+
         }
 
         public void DeleteClient(int IDNumber)
@@ -156,17 +543,83 @@ namespace BillingSystemMVC.BLL
             dao.Delete(client);
         }
 
-        public List<Client> GetActiveClients()
+        public List<ClientStatusDTO> GetActiveClients()
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.Validity >= DateTime.Now).ToList();
-            
+            context.Clients.Where(c => c.Validity >= DateTime.Now).ToList();
+
+            List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
+
         }
 
-        public List<Client> GetInActiveClients()
+        public List<ClientStatusDTO> GetInActiveClients()
         {
             BillingSystemContext context = new BillingSystemContext();
-            return context.Clients.Where(c => c.Validity < DateTime.Now).ToList();
+            context.Clients.Where(c => c.Validity < DateTime.Now).ToList();
+
+            List<Client> clients = context
+                .Clients.Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .ToList();
+
+            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
+            foreach (Client c in clients)
+            {
+                ClientStatusDTO newClient = new ClientStatusDTO();
+                newClient.Adress = c.Adress;
+                newClient.ClientTarif = c.ClientTarif;
+                newClient.ClientZone = c.ClientZone;
+                newClient.Comment = c.Comment;
+                newClient.IDNumber = c.IDNumber;
+                newClient.Included = c.Included;
+                newClient.IPAdress = c.IPAdress;
+                newClient.Name = c.Name;
+                newClient.PhoneNumber = c.PhoneNumber;
+                newClient.Validity = c.Validity;
+
+                if (newClient.Validity >= DateTime.Now)
+                {
+                    newClient.Status = "ACTIVE";
+                }
+                else
+                {
+                    newClient.Status = "INACTIVE";
+                }
+                clientsDTO.Add(newClient);
+            }
+
+            return clientsDTO;
         }
 
         public List<Client> GetExpiringClients()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BillingSystemMVC.BLL;
+using BillingSystemMVC.BLL.Model;
 using BillingSystemMVC.DAO;
 using BillingSystemMVC.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -35,13 +36,15 @@ namespace BillingSystemMVC.Controllers
 
         public IActionResult ViewAllClients()
         {
-            ClientsDao dao = new ClientsDao();
-            return View(dao.GetAll());
+            ClientsBLL bll = new ClientsBLL();
+            return View(bll.GetAll());
         }
 
         public IActionResult ViewFilteredClients(string FilterType, string Filter)
         {
             ClientsBLL clientsBLL = new ClientsBLL();
+
+
             if (FilterType == "name")
             {
                 return View(clientsBLL.GetFilteredClients(ClientsBLL.ClientFilterType.Name, Filter));
@@ -99,7 +102,8 @@ namespace BillingSystemMVC.Controllers
         public IActionResult ClientDetails(int ID)
         {
             ClientsBLL clientsBLL = new ClientsBLL();
-            Client client = clientsBLL.GetClient(ID);
+            ClientStatusDTO client = clientsBLL.GetClient(ID);
+            
 
             if (client == null)
             {
@@ -111,9 +115,9 @@ namespace BillingSystemMVC.Controllers
         
         public IActionResult UpdateClient(int IDNumber)
         {
-            ClientsBLL clientsBLL = new ClientsBLL();
+            ClientsDao clientsDao = new ClientsDao();
 
-            Client client = clientsBLL.GetClient(IDNumber);
+            Client client = clientsDao.Details(IDNumber);
 
             if (client == null)
             {

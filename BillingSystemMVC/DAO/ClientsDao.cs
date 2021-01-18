@@ -1,4 +1,5 @@
-﻿using BillingSystemMVC.Controllers;
+﻿using BillingSystemMVC.BLL.Model;
+using BillingSystemMVC.Controllers;
 using BillingSystemMVC.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
