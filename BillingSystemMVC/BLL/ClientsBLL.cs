@@ -6,12 +6,37 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BillingSystemMVC.BLL
 {
     public class ClientsBLL
     {
+        private ClientStatusDTO ModelToDto(Client client)
+        {
+            ClientStatusDTO clientDto = new ClientStatusDTO();
+
+
+            PropertyInfo[] t1 = client.GetType()
+              .GetProperties();
+            PropertyInfo[] t2 = clientDto
+                          .GetType()
+                          .GetProperties();
+
+            foreach (PropertyInfo f in client.GetType()
+              .GetProperties()
+              .Where(f => clientDto
+                          .GetType()
+                          .GetProperties()
+                          .Any(fields => fields.Name == f.Name)))
+          {
+              clientDto.GetType().GetProperty(f.Name).SetValue(clientDto,
+                  client.GetType().GetProperty(f.Name).GetValue(client));
+          }
+
+            return clientDto;
+        }
         public List<ClientStatusDTO> GetAll()
         {
             BillingSystemContext context = new BillingSystemContext();
@@ -23,17 +48,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach(Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+                
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -51,19 +67,14 @@ namespace BillingSystemMVC.BLL
 
         public ClientStatusDTO GetClient(int ID)
         {
-            ClientsDao clientsDao = new ClientsDao();
-            Client client = clientsDao.Details(ID);
-            ClientStatusDTO clientDto = new ClientStatusDTO();
-            clientDto.Adress = client.Adress;
-            clientDto.ClientTarif = client.ClientTarif;
-            clientDto.ClientZone = client.ClientZone;
-            clientDto.Comment = client.Comment;
-            clientDto.IDNumber = client.IDNumber;
-            clientDto.Included = client.Included;
-            clientDto.IPAdress = client.IPAdress;
-            clientDto.Name = client.Name;
-            clientDto.PhoneNumber = client.PhoneNumber;
-            clientDto.Validity = client.Validity;
+            BillingSystemContext context = new BillingSystemContext();
+            Client client = context.Clients
+                .Include(c => c.ClientTarif)
+                .Include(c => c.ClientZone)
+                .FirstOrDefault(c => c.IDNumber == ID);
+
+            ClientStatusDTO clientDto = ModelToDto(client);
+            
 
            return clientDto;
         }
@@ -126,17 +137,7 @@ namespace BillingSystemMVC.BLL
                 List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
                 foreach (Client c in clients)
                 {
-                    ClientStatusDTO newClient = new ClientStatusDTO();
-                    newClient.Adress = c.Adress;
-                    newClient.ClientTarif = c.ClientTarif;
-                    newClient.ClientZone = c.ClientZone;
-                    newClient.Comment = c.Comment;
-                    newClient.IDNumber = c.IDNumber;
-                    newClient.Included = c.Included;
-                    newClient.IPAdress = c.IPAdress;
-                    newClient.Name = c.Name;
-                    newClient.PhoneNumber = c.PhoneNumber;
-                    newClient.Validity = c.Validity;
+                    ClientStatusDTO newClient = ModelToDto(c);
 
                     if (newClient.Validity >= DateTime.Now)
                     {
@@ -165,17 +166,8 @@ namespace BillingSystemMVC.BLL
 
                 foreach (Client c in clients)
                 {
-                    ClientStatusDTO newClient = new ClientStatusDTO();
-                    newClient.Adress = c.Adress;
-                    newClient.ClientTarif = c.ClientTarif;
-                    newClient.ClientZone = c.ClientZone;
-                    newClient.Comment = c.Comment;
-                    newClient.IDNumber = c.IDNumber;
-                    newClient.Included = c.Included;
-                    newClient.IPAdress = c.IPAdress;
-                    newClient.Name = c.Name;
-                    newClient.PhoneNumber = c.PhoneNumber;
-                    newClient.Validity = c.Validity;
+                    ClientStatusDTO newClient = ModelToDto(c);
+                    
 
                     if (newClient.Validity >= DateTime.Now)
                     {
@@ -203,17 +195,8 @@ namespace BillingSystemMVC.BLL
 
                 foreach (Client c in clients)
                 {
-                    ClientStatusDTO newClient = new ClientStatusDTO();
-                    newClient.Adress = c.Adress;
-                    newClient.ClientTarif = c.ClientTarif;
-                    newClient.ClientZone = c.ClientZone;
-                    newClient.Comment = c.Comment;
-                    newClient.IDNumber = c.IDNumber;
-                    newClient.Included = c.Included;
-                    newClient.IPAdress = c.IPAdress;
-                    newClient.Name = c.Name;
-                    newClient.PhoneNumber = c.PhoneNumber;
-                    newClient.Validity = c.Validity;
+                    ClientStatusDTO newClient = ModelToDto(c);
+                    
 
                     if (newClient.Validity >= DateTime.Now)
                     {
@@ -242,17 +225,8 @@ namespace BillingSystemMVC.BLL
 
                 foreach (Client c in clients)
                 {
-                    ClientStatusDTO newClient = new ClientStatusDTO();
-                    newClient.Adress = c.Adress;
-                    newClient.ClientTarif = c.ClientTarif;
-                    newClient.ClientZone = c.ClientZone;
-                    newClient.Comment = c.Comment;
-                    newClient.IDNumber = c.IDNumber;
-                    newClient.Included = c.Included;
-                    newClient.IPAdress = c.IPAdress;
-                    newClient.Name = c.Name;
-                    newClient.PhoneNumber = c.PhoneNumber;
-                    newClient.Validity = c.Validity;
+                    ClientStatusDTO newClient = ModelToDto(c);
+                    
 
                     if (newClient.Validity >= DateTime.Now)
                     {
@@ -281,17 +255,8 @@ namespace BillingSystemMVC.BLL
 
                 foreach (Client c in clients)
                 {
-                    ClientStatusDTO newClient = new ClientStatusDTO();
-                    newClient.Adress = c.Adress;
-                    newClient.ClientTarif = c.ClientTarif;
-                    newClient.ClientZone = c.ClientZone;
-                    newClient.Comment = c.Comment;
-                    newClient.IDNumber = c.IDNumber;
-                    newClient.Included = c.Included;
-                    newClient.IPAdress = c.IPAdress;
-                    newClient.Name = c.Name;
-                    newClient.PhoneNumber = c.PhoneNumber;
-                    newClient.Validity = c.Validity;
+                    ClientStatusDTO newClient = ModelToDto(c);
+                    
 
                     if (newClient.Validity >= DateTime.Now)
                     {
@@ -323,17 +288,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+               
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -363,17 +319,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+             
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -401,17 +348,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+                
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -439,17 +377,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+                
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -477,17 +406,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+             
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -507,13 +427,14 @@ namespace BillingSystemMVC.BLL
             string Name,
             string Adress,
             string PhoneNumber,
-            int ClientZone,
-            int ClientTariff,
+            int Tariff,
+            int Zone,
             string PonClient,
             string Comment,
             int IDNumber)
         {
             BillingSystemContext context = new BillingSystemContext();
+
             
 
             Client client = new Client()
@@ -522,8 +443,8 @@ namespace BillingSystemMVC.BLL
                 Name = Name,
                 Adress = Adress,
                 PhoneNumber = PhoneNumber,
-                ZoneId = ClientZone,
-                TariffId = ClientTariff,
+                ZoneId = Tariff,
+                TariffId = Zone,
                 Comment = Comment,
                 IDNumber = IDNumber
 
@@ -556,17 +477,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+               
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -596,17 +508,8 @@ namespace BillingSystemMVC.BLL
             List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
             foreach (Client c in clients)
             {
-                ClientStatusDTO newClient = new ClientStatusDTO();
-                newClient.Adress = c.Adress;
-                newClient.ClientTarif = c.ClientTarif;
-                newClient.ClientZone = c.ClientZone;
-                newClient.Comment = c.Comment;
-                newClient.IDNumber = c.IDNumber;
-                newClient.Included = c.Included;
-                newClient.IPAdress = c.IPAdress;
-                newClient.Name = c.Name;
-                newClient.PhoneNumber = c.PhoneNumber;
-                newClient.Validity = c.Validity;
+                ClientStatusDTO newClient = ModelToDto(c);
+                
 
                 if (newClient.Validity >= DateTime.Now)
                 {

@@ -1,4 +1,4 @@
-﻿@model BillingSystemMVC.Model.Client
+﻿@model BillingSystemMVC.BLL.Model.ClientStatusDTO
 
 @{
     ViewData["Title"] = "UpdateClient";
@@ -23,9 +23,9 @@
                 <span asp-validation-for="Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ZoneId" class="control-label"></label>
-                <input asp-for="ZoneId" class="form-control" name="ZoneId" value="@Model.ZoneId"/>
-                <span asp-validation-for="ZoneId" class="text-danger"></span>
+                <label asp-for="ClientZone" class="control-label"></label>
+                <input asp-for="ClientZone" class="form-control" name="ZoneId" value="@Model.ClientZone.Town"/>
+                <span asp-validation-for="ClientZone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IPAdress" class="control-label"></label>
@@ -48,9 +48,9 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="TariffId" class="control-label"></label>
-                <input asp-for="TariffId" class="form-control" name="TariffId" value="@Model.TariffId"/>
-                <span asp-validation-for="TariffId" class="text-danger"></span>
+                <label asp-for="ClientTarif" class="control-label"></label>
+                <input asp-for="ClientTarif" class="form-control" name="TariffId" value="@Model.ClientTarif.Name"/>
+                <span asp-validation-for="ClientTarif" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IDNumber" class="control-label"></label>
