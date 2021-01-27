@@ -1,12 +1,12 @@
-﻿@model BillingSystemMVC.BLL.Model.ClientStatusDTO
+﻿@model BillingSystemMVC.BLL.Model.ClientEditDTO
 
 @{
     ViewData["Title"] = "UpdateClient";
 }
 
-<h1>UpdateClient</h1>
+<h1>Редакция</h1>
 
-<h4>Client</h4>
+<h4>Клиент</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,38 +19,45 @@
             </div>
             <div class="form-group">
                 <label asp-for="Adress" class="control-label"></label>
-                <input asp-for="Adress" class="form-control" name="Adress" value="@Model.Adress"/>
+                <input asp-for="Adress" class="form-control" name="Adress" value="@Model.Adress" />
                 <span asp-validation-for="Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientZone" class="control-label"></label>
-                <input asp-for="ClientZone" class="form-control" name="ZoneId" value="@Model.ClientZone.Town"/>
-                <span asp-validation-for="ClientZone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IPAdress" class="control-label"></label>
-                <input asp-for="IPAdress" class="form-control" name="IPAdress" value="@Model.IPAdress"/>
-                <span asp-validation-for="IPAdress" class="text-danger"></span>
+                <label asp-for="ZoneId" class="control-label"></label>
+                <select name="ZoneId" >
+                    @foreach (var z in Model.ChooseZonesAndTariffs.Zones)
+                    {
+                        <option name="ZoneId" value="@z.IDNumber">@z.Town</option>
+                    }
+                </select>
+
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber"/>
+                <input asp-for="PhoneNumber" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
-                
+
             </div>
             <div class="form-group">
                 <label asp-for="Comment" class="control-label"></label>
-                <input asp-for="Comment" class="form-control" name="Comment" value="@Model.Comment"/>
+                <input asp-for="Comment" class="form-control" name="Comment" value="@Model.Comment" />
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-                <label asp-for="ClientTarif" class="control-label"></label>
-                <input asp-for="ClientTarif" class="form-control" name="TariffId" value="@Model.ClientTarif.Name"/>
-                <span asp-validation-for="ClientTarif" class="text-danger"></span>
+                <label asp-for="TariffId" class="control-label"></label>
+                <select name="TariffId">
+                    @foreach (var t in Model.ChooseZonesAndTariffs.Tariffs)
+                    {
+                        <option name="TariffId" value="@t.IDNumber">@t.Name</option>
+                    }
+
+                </select>
+
+
             </div>
             <div class="form-group">
                 <label asp-for="IDNumber" class="control-label"></label>

@@ -116,7 +116,7 @@ namespace BillingSystemMVC.Controllers
         public IActionResult UpdateClient(int IDNumber)
         {
             ClientsBLL clientsBLL = new ClientsBLL();
-            ClientStatusDTO client = clientsBLL.GetClient(IDNumber);
+            ClientEditDTO client = clientsBLL.GetClientEdit(IDNumber);
 
             if (client == null)
             {
