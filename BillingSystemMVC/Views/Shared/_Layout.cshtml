@@ -41,29 +41,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Профил</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Register" asp-action="Register">Регистрация</a>
-                            <style>
-                                .text-dark {
-                                    color: #ffc107 !important
-                                }
-                            </style>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Login" asp-action="UserLogin">Влизане</a>
-                            <style>
-                                .text-dark {
-                                    
-                                    color: #ffc107 !important
-                                }
-                            </style>
-                        </li>
-                    </ul>
                 </div>
             </div>
+            @Html.Partial("_LoginPartial")
         </nav>
         
     </header>
