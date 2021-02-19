@@ -18,8 +18,8 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Login", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="nav navbar-nav navbar-right flex-grow-1">
+        <li class="nav-item">@Html.ActionLink("Register", "Register", "Login", routeValues: null, htmlAttributes: new { id = "registerLink", @class="nav-link text-dark" })</li>
+        <li class="nav-item">@Html.ActionLink("Log in", "UserLogin", "Login", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-dark" })</li>
     </ul>
 }
