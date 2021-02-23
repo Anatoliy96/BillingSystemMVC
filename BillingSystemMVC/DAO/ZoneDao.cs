@@ -35,5 +35,11 @@ namespace BillingSystemMVC.DAO
             context.Zones.Remove(zone);
             context.SaveChanges();
         }
+
+        public Zone Details(int ID)
+        {
+            BillingSystemContext context = new BillingSystemContext();
+            return context.Zones.FirstOrDefault(p => p.IDNumber == ID);
+        }
     }
 }

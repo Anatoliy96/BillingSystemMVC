@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BillingSystemMVC.Model.Zone>
+@{
+    ViewData["Title"] = "Index";
+}
+<div>
+    <input type="button"
+           value="Добави Зона"
+           onclick="location.href='@Url.Action("AddZone", "Zone" )'" />
+</div>
+<h1>Информация за Зоните</h1>
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Номер</th>
+            <th scope="col">Собственик</th>
+            <th scope="col">Населено място</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var z in Model)
+        {
+            <tr>
+                <td>@z.IDNumber</td>
+                <td>@Html.ActionLink(z.Town, "ZoneDetails", "Zone", new { id = z.IDNumber })</td>
+                <td>@z.Town</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
