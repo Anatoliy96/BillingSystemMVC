@@ -147,6 +147,7 @@ namespace BillingSystemMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteClient(int IDNumber)
         {
             ClientsBLL clientsBLL = new ClientsBLL();

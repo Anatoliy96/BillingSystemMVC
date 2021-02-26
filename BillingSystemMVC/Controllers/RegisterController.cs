@@ -28,6 +28,17 @@ namespace BillingSystemMVC.Controllers
                 {
                     context.Users.Add(user);
                     context.SaveChanges();
+                    
+                    Users newUser = context.Users.FirstOrDefault(u => u.Email == user.Email);
+                    UserRoleMapping urm = new UserRoleMapping()
+                    {
+                        UserID = newUser.IDNumber,
+                        RoleID = 4
+                    };
+
+                    context.UserRoleMappings.Add(urm);
+                    context.SaveChanges();
+
                     return RedirectToAction("UserLogin", "Login");
                 }
             }
