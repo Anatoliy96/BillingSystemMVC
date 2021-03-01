@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BillingSystemMVC.BLL;
+using BillingSystemMVC.BLL.Model.Users;
 using BillingSystemMVC.DAO;
 using BillingSystemMVC.Model;
 using Microsoft.AspNetCore.Identity;
@@ -20,27 +22,14 @@ namespace BillingSystemMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([Bind] Users user)
+        public IActionResult Register([Bind] UserProfileDto user)
         {
             try
             {
-                using (BillingSystemContext context = new BillingSystemContext())
-                {
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                    
-                    Users newUser = context.Users.FirstOrDefault(u => u.Email == user.Email);
-                    UserRoleMapping urm = new UserRoleMapping()
-                    {
-                        UserID = newUser.IDNumber,
-                        RoleID = 4
-                    };
+                UsersBLL bll = new UsersBLL();
 
-                    context.UserRoleMappings.Add(urm);
-                    context.SaveChanges();
-
-                    return RedirectToAction("UserLogin", "Login");
-                }
+                bll.RegisterUser(user);
+                return RedirectToAction("UserLogin", "Login");
             }
             catch (Exception ex)
             {

@@ -24,5 +24,9 @@ namespace BillingSystemMVC.Model
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Your password and confirm password do not match")]
         public string ConfirmPassword { get; set; }
+
+        [ForeignKey("Profile")]
+
+        public int ProfileID { get; set; }
     }
 }

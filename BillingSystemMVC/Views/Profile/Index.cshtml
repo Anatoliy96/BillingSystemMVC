@@ -1,14 +1,9 @@
-﻿@model IEnumerable<BillingSystemMVC.Model.Profile>
+﻿@model IEnumerable<BillingSystemMVC.BLL.Model.Users.UserProfileDto>
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="row">
-    <div>
-        <input type="button"
-               value="Добави Профил"
-               onclick="location.href='@Url.Action("AddProfile", "Profile" )'" />
-    </div>
     <div>
         @Html.ActionLink("Всички профили", "ViewAllRegisteredProfiles", "Profile")
     </div>
@@ -19,10 +14,10 @@
     <thead>
         <tr>
             <th scope="col">Номер</th>
-            <th scope="col">Потребител</th>
-            <th scope="col">Потребителски тип</th>
             <th scope="col">Име</th>
             <th scope="col">Телефон</th>
+            <th scope="col">Потребителско име</th>
+            <th scope="col">Емейл</th>
 
         </tr>
     </thead>
@@ -31,10 +26,10 @@
         {
             <tr>
                 <td>@p.IDNumber</td>
-                <td>@Html.ActionLink(p.UserName, "ProfileDetails", "Profile", new { id = p.IDNumber })</td>
-                <td>@p.UserNameType</td>
                 <td>@p.Name</td>
                 <td>@p.PhoneNumber</td>
+                <td>@p.UserName</td>
+                <td>@p.Email</td>
 
             </tr>
         }

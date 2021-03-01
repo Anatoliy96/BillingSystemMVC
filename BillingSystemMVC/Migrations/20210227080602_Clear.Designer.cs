@@ -3,14 +3,16 @@ using System;
 using BillingSystemMVC.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    partial class BillingSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20210227080602_Clear")]
+    partial class Clear
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

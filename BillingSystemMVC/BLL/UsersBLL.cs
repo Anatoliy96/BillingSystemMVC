@@ -25,5 +25,33 @@ namespace BillingSystemMVC.BLL
 
             return userdto;
         }
+
+        public void RegisterUser(UserProfileDto profileDto)
+        {
+            Profile profile = new Profile();
+
+            profile.Name = profileDto.Name;
+            profile.PhoneNumber = profileDto.PhoneNumber;
+
+            BillingSystemContext context = new BillingSystemContext();
+            context.Profiles.Add(profile);
+            context.SaveChanges();
+            Users user = new Users();
+            user.UserName = profileDto.UserName;
+            user.Email = profileDto.Email;
+            user.Password = profileDto.Password;
+            user.ConfirmPassword = profileDto.ConfirmPassword;
+
+            user.ProfileID = profile.IDNumber;
+            context.Users.Add(user);
+
+            context.SaveChanges();
+        } 
+
+        public List<Users> GetUsers()
+        {
+            BillingSystemContext context = new BillingSystemContext();
+            return context.Users.ToList();
+        }
     }
 }

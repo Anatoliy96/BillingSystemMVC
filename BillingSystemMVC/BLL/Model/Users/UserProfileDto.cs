@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BillingSystemMVC.Model
+namespace BillingSystemMVC.BLL.Model.Users
 {
-    public class Profile : ID
+    public class UserProfileDto : BillingSystemMVC.Model.Users
     {
-        public string PhoneNumber { get; set; }
         public string Name { get; set; }
 
-
+        public string PhoneNumber { get; set; }
     }
 }

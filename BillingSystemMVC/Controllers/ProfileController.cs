@@ -17,8 +17,9 @@ namespace BillingSystemMVC.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            ProfileDAO dao = new ProfileDAO();
-            return View(dao.GetAll());
+            ProfileBLL profileBll = new ProfileBLL();
+
+            return View(profileBll.GetUserProfiles());
         }
 
         public IActionResult ViewAllRegisteredProfiles()
@@ -33,19 +34,13 @@ namespace BillingSystemMVC.Controllers
         }
 
         public IActionResult AddProfile(
-            string UserName,
-            string UserNameType,
-            string Password,
             string PhoneNumber,
             string Name)
         {
             ProfileBLL profile = new ProfileBLL();
-            if (UserName != null)
+            if (Name != null)
             {
            profile.Add(
-           UserName,
-           UserNameType,
-           Password,
            PhoneNumber,
            Name);
                
@@ -87,13 +82,13 @@ namespace BillingSystemMVC.Controllers
 
     [HttpPost]
 
-        public IActionResult UpdateProfile(string UserName,string UserNameType,string Password,string PhoneNumber,string Name,int IDNumber)
+        public IActionResult UpdateProfile(string PhoneNumber,string Name,int IDNumber)
         {
 
             //BillingSystemContext context = new BillingSystemContext();
             ProfileBLL bll = new ProfileBLL();
 
-            bll.UpdateProfile(UserName, UserNameType, Password, PhoneNumber, Name, IDNumber);
+            bll.UpdateProfile(PhoneNumber, Name, IDNumber);
             return RedirectToAction("ProfileDetails", new { ID = IDNumber });
         }
        

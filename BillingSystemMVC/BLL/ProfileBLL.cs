@@ -1,4 +1,5 @@
 ﻿using BillingSystemMVC.BLL.Model;
+using BillingSystemMVC.BLL.Model.Users;
 using BillingSystemMVC.DAO;
 
 using BillingSystemMVC.Model;
@@ -30,10 +31,30 @@ namespace BillingSystemMVC.BLL
             return profiles;
             
         }
+
+        public List<UserProfileDto> GetUserProfiles()
+        {
+            UsersBLL usersBll = new UsersBLL();
+            List<UserProfileDto> output = new List<UserProfileDto>();
+            foreach(Users u in usersBll.GetUsers())
+            {
+                UserProfileDto dto = new UserProfileDto();
+                dto.IDNumber = u.IDNumber;
+                dto.UserName = u.UserName;
+                dto.Email = u.Email;
+                ProfileDAO profileDao = new ProfileDAO();
+                Profile profile = profileDao.Details(u.ProfileID);
+
+                dto.Name = profile.Name;
+                dto.PhoneNumber = profile.PhoneNumber;
+
+                output.Add(dto);
+            }
+
+            return output;
+        }
+
         public void Add(
-            string UserName,
-            string UserNameType,
-            string Password,
             string PhoneNumber,
             string Name)
         {
@@ -41,9 +62,6 @@ namespace BillingSystemMVC.BLL
             
             Profile profile = new Profile()
             {
-                UserName = UserName,
-                UserNameType = UserNameType,
-                Password = Password,
                 PhoneNumber = PhoneNumber,
                 Name = Name
             };
@@ -53,9 +71,6 @@ namespace BillingSystemMVC.BLL
         }
 
         public void UpdateProfile(
-            string UserName,
-            string UserNameType,
-            string Password,
             string PhoneNumber,
             string Name,
             int IDNumber)
@@ -64,9 +79,6 @@ namespace BillingSystemMVC.BLL
 
             Profile profile = new Profile()
             {
-                UserName = UserName,
-                UserNameType = UserNameType,
-                Password = Password,
                 PhoneNumber = PhoneNumber,
                 Name = Name,
                 IDNumber = IDNumber
