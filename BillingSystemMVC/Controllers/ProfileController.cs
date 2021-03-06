@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BillingSystemMVC.BLL;
 using BillingSystemMVC.DAO;
@@ -18,7 +19,6 @@ namespace BillingSystemMVC.Controllers
         public IActionResult Index()
         {
             ProfileBLL profileBll = new ProfileBLL();
-
             return View(profileBll.GetUserProfiles());
         }
 
@@ -40,29 +40,36 @@ namespace BillingSystemMVC.Controllers
             ProfileBLL profile = new ProfileBLL();
             if (Name != null)
             {
-           profile.Add(
-           PhoneNumber,
-           Name);
-               
+                profile.Add(
+                PhoneNumber,
+                Name);
+
                 return RedirectToAction("ViewAllRegisteredProfiles");
             }
-            
+
             return View("AddProfile");
         }
 
-        public IActionResult ProfileDetails(int ID)
+        public IActionResult ProfileDetails()
         {
             ProfileBLL profileBLL = new ProfileBLL();
 
-            Profile prof = profileBLL.GetProfile(ID);
+            //string userName = this.User.Claims.FirstOrDefault(c => c.Type == "Name").Value;
+            string userName = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            BillingSystemContext context = new BillingSystemContext();
+            Users currUser = context.Users.FirstOrDefault(u => u.UserName == userName);
+
+            Profile prof = profileBLL.GetProfile(currUser.ProfileID);
 
             if (prof == null)
             {
                 NotFound();
             }
-            
+
             return View(prof);
         }
+
+        
         
         public IActionResult UpdateProfile(int IDNumber)
         {

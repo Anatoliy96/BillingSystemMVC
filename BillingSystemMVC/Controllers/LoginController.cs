@@ -36,7 +36,7 @@ namespace BillingSystemMVC.Controllers
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, userRoles.UserName),
-                    new Claim(ClaimTypes.Email, userRoles.Email),
+                    new Claim(ClaimTypes.Email, userRoles.Email)
                 };
 
                 foreach(RoleMaster rm in userRoles.Roles)
