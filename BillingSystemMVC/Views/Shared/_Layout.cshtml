@@ -36,18 +36,22 @@
                                     }
                                 </style>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a>
-                            </li>
                             @if (User.IsInRole("Owner") || User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Профили</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Zone" asp-action="Index">Зони</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a>
+                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Payment" asp-action="Register">Каса</a>
+                                    </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Zone" asp-action="Index">Зони</a>
-                            </li>
+
                         }
                     </ul>
                 </div>

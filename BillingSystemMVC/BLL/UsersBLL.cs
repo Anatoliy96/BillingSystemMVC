@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Scrypt;
 namespace BillingSystemMVC.BLL
 {
     public class UsersBLL
@@ -28,6 +28,7 @@ namespace BillingSystemMVC.BLL
 
         public void RegisterUser(UserProfileDto profileDto)
         {
+            ScryptEncoder encoder = new ScryptEncoder();
             Profile profile = new Profile();
 
             profile.Name = profileDto.Name;
@@ -39,8 +40,8 @@ namespace BillingSystemMVC.BLL
             Users user = new Users();
             user.UserName = profileDto.UserName;
             user.Email = profileDto.Email;
-            user.Password = profileDto.Password;
-            user.ConfirmPassword = profileDto.ConfirmPassword;
+            user.Password = encoder.Encode(profileDto.Password);
+            user.ConfirmPassword = encoder.Encode(profileDto.ConfirmPassword);
 
             user.ProfileID = profile.IDNumber;
             context.Users.Add(user);
