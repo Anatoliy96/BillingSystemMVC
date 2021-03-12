@@ -34,5 +34,11 @@ namespace BillingSystemMVC.DAO
             context.Tariffs.Remove(tariff);
             context.SaveChanges();
         }
+
+        public Tariff Details(int ID)
+        {
+            BillingSystemContext context = new BillingSystemContext();
+            return context.Tariffs.FirstOrDefault(t => t.IDNumber == ID);
+        }
     }
 }

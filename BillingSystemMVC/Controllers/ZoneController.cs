@@ -35,8 +35,8 @@ namespace BillingSystemMVC.Controllers
             if (Owner != null)
             {
                 zone.Add(
-                Owner,
-                Town);
+                Town,
+                Owner);
 
                 return RedirectToAction("Index");
             }

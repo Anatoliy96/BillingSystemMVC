@@ -9,7 +9,8 @@
 @using (Html.BeginForm("Register", "Payment"))
 {
 <div class="mb-3">
-    <input type="hidden" asp-for="Client" value="@Model.Client"/>
+    <label asp-for="Client" class="control-label"></label>
+    <input asp-for="Client" class="form-control" />
     <label for="Amount" class="form-label">Сума</label>
     <input type="number" asp-for="Amount" class="form-control" id="exampleFormControlInput1" placeholder="Amount">
     <input type="submit" value="Плащане" />

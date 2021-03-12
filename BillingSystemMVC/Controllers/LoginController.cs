@@ -29,7 +29,8 @@ namespace BillingSystemMVC.Controllers
         {
             
             BillingSystemContext context = new BillingSystemContext();
-            if (context.Users.Any(u => u.UserName == user.UserName && u.Password == user.Password))
+            Users userFromBase = context.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            if (userFromBase != null && SecurePasswordHasher.Verify(user.Password, userFromBase.Password))
             {
                 UsersBLL usersBLL = new UsersBLL();
                 UserClaimsDto userRoles = usersBLL.GetUserClaims(user.UserName);
