@@ -13,7 +13,7 @@ namespace BillingSystemMVC.Model
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage ="name is requred")]
+        [Required(ErrorMessage ="User name is requred")]
        public string UserName { get; set; }
         [Required(ErrorMessage = "Please Enter the Password...")]
         [DataType(DataType.Password)]

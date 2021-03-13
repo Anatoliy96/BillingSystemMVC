@@ -1,6 +1,7 @@
 ﻿@model BillingSystemMVC.BLL.Model.Users.UserProfileDto
 @{
     ViewData["Title"] = "Register";
+    ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,7 +11,7 @@
     <div class="col-md-6 mx-auto">
         <div class="card">
             <div class="card-header bg-danger text-white">
-                <h5 class="text-uppercase text-center">Regirtation Form</h5>
+                <h5 class="text-uppercase text-center">Форма за регистрация</h5>
             </div>
             <div class="card-body">
                 <form asp-action="Register">
@@ -46,6 +47,7 @@
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <input type="submit" value="Register" class="btn btn-sm btn-success text-uppercase rounded-0" />
+                    @ViewBag.Error
                 </form>
             </div>
         </div>

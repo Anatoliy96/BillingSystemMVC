@@ -24,6 +24,18 @@ namespace BillingSystemMVC.Controllers
         [HttpPost]
         public IActionResult Register([Bind] UserProfileDto user)
         {
+            BillingSystemContext context = new BillingSystemContext();
+            var registeredUserName = context.Users.Where(u => u.UserName.Equals(user.UserName)).SingleOrDefault();
+            if (registeredUserName != null)
+            {
+                ViewBag.Error = "This user is already registered.";
+                return View();
+            }
+            if (context.Users.Any(u => u.Email == user.Email))
+            {
+                ViewBag.Error = "This e-mail is already taken.";
+                return View();
+            }
             try
             {
                 UsersBLL bll = new UsersBLL();
