@@ -31,7 +31,7 @@ namespace BillingSystemMVC.Controllers
             int InternetSpeed)
         {
             TariffBLL tariffBLL = new TariffBLL();
-            if (tariffBLL != null)
+            if (Name != null)
             {
                 tariffBLL.Add(
                     Name,

@@ -31,7 +31,6 @@ namespace BillingSystemMVC.BLL
 
         public void RegisterUser(UserProfileDto profileDto)
         {
-            
             Profile profile = new Profile();
 
             profile.Name = profileDto.Name;

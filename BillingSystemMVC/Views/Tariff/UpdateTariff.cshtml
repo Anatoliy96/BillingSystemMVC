@@ -1,0 +1,45 @@
+﻿@model BillingSystemMVC.Model.Tariff
+
+@{
+    ViewData["Title"] = "UpdateTariff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Промени тарифа</h1>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateTariff">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" name="Name" value="@Model.Name"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" name="Price" value="@Model.Price"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InternetSpeed" class="control-label"></label>
+                <input asp-for="InternetSpeed" class="form-control" name="InternetSpeed" value="@Model.InternetSpeed"/>
+                <span asp-validation-for="InternetSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDNumber" class="control-label"></label>
+                <input asp-for="IDNumber" class="form-control" name="IDNumber" value="@Model.IDNumber"/>
+                <span asp-validation-for="IDNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,52 @@
+﻿@model BillingSystemMVC.Model.Tariff
+
+@{
+    ViewData["Title"] = "TariffDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>TariffDetails</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InternetSpeed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InternetSpeed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IDNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IDNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Промени Тарифа", "UpdateTariff", "Tariff", new { IDNumber = Model.IDNumber }) |
+    @using (Html.BeginForm("DeleteTariff", "Tariff", new { IDNumber = Model.IDNumber }))
+    {
+        <input type="submit" value="Изтрий Тарифа"
+               onclick="return confirm('Сигурен ли сте,че искате да изтриете тарифата?');" />
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BillingSystemMVC.Model.Tariff>
+@{
+    ViewData["Title"] = "Index";
+}
+<div>
+    <input type="button"
+           value="Добави Тарифа"
+           onclick="location.href='@Url.Action("AddTariff", "Tariff" )'" />
+</div>
+<h1>Информация за Тарифите</h1>
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Номер</th>
+            <th scope="col">Име</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Скорост</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+        <tr>
+            <td>@t.IDNumber</td>
+            <td>@Html.ActionLink(t.Name, "TariffDetails", "Tariff", new { id = t.IDNumber })</td>
+            <td>@t.Price</td>
+            <td>@t.InternetSpeed</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
