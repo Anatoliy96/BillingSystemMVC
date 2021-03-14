@@ -9,14 +9,14 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="padding: .5rem 0rem !important; background-color: #061a4c !important;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="padding: .5rem 0rem !important;">
             <img src="./images/sdgsdf.jpg" />
             <div class="container">
 
                 <a class="navbar-brand text-black-50" asp-area="" asp-controller="Home" asp-action="Index">BillingSystemMVC</a>
                 <style>
                     .text-black-50 {
-                        color: white !important;
+                        color: #f5f5f5 !important;
                     }
                 </style>
 
@@ -29,7 +29,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                                 <style>
                                     .text-dark {
                                         color: #ffc107 !important
@@ -39,22 +39,25 @@
                             @if (User.IsInRole("Owner") || User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">Профили</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Index">Профили</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Zone" asp-action="Index">Зони</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Zone" asp-action="Index">Зони</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tariff" asp-action="Index">Тарифи</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Tariff" asp-action="Index">Тарифи</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a>
                                 </li>
+                                
+                            }
+                            @if (User.IsInRole("Casher") || User.IsInRole("Owner"))
+                            {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Payment" asp-action="Register">Каса</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Payment" asp-action="Register">Каса</a>
                                 </li>
                             }
-
                         }
                     </ul>
                 </div>
