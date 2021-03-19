@@ -48,8 +48,6 @@ namespace BillingSystemMVC.BLL
 
                 throw;
             }
-            
-            
         }
     }
 }

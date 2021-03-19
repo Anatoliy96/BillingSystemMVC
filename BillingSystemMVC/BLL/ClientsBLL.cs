@@ -127,6 +127,7 @@ namespace BillingSystemMVC.BLL
                 PhoneNumber = PhoneNumber,
                 Comment = Comment,
                 Included = DateTime.Now,
+                Validity = DateTime.Now,
                 TariffId = tariff
             };
             ClientsDao dao = new ClientsDao();
@@ -443,9 +444,9 @@ namespace BillingSystemMVC.BLL
             string Comment,
             int IDNumber)
         {
-            BillingSystemContext context = new BillingSystemContext();
+            ClientsDao dao = new ClientsDao();
 
-            
+            Client oldClient = dao.Details(IDNumber);
 
             Client client = new Client()
 
@@ -456,11 +457,12 @@ namespace BillingSystemMVC.BLL
                 ZoneId = Tariff,
                 TariffId = Zone,
                 Comment = Comment,
-                IDNumber = IDNumber
-
+                IDNumber = IDNumber,
+                Validity = oldClient.Validity,
+                Included = oldClient.Included
             };
             
-            ClientsDao dao = new ClientsDao();
+            
             dao.Update(client);
             
 
