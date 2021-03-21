@@ -18,22 +18,36 @@ namespace BillingSystemMVC.BLL
             return context.Payments.Where(p => p.Date >= From && p.Date <= To).ToList();
         }
 
-        public Payment RegisterPayment([Bind] Payment payment)
+        public Payment RegisterPayment(int ClientId, decimal Amount)
         {
             try
             {
                 using (BillingSystemContext context = new BillingSystemContext())
                 {
-                    DateTime validity = context.Clients.FirstOrDefault(c => c.IDNumber == payment.Client).Validity;
-                    Tariff tarif = context.Clients.Include(c => c.ClientTarif).FirstOrDefault(c => c.IDNumber == payment.Client).ClientTarif;
-                    Tariff tarifa = context.Tariffs.FirstOrDefault(t => t.IDNumber == context.Clients.FirstOrDefault(c => c.TariffId == t.IDNumber).TariffId);
+                    DateTime validity = context.Clients.FirstOrDefault(c => c.IDNumber == ClientId).Validity;
+                    
+
+                    Tariff tarif = context.Clients
+                        .Include(c => c.ClientTarif)
+                        .FirstOrDefault(c => c.IDNumber == ClientId).ClientTarif;
+                    
+                    Tariff tarifa = context.Tariffs
+                        .FirstOrDefault(
+                        t => t.IDNumber == context.Clients.FirstOrDefault(c => c.TariffId == t.IDNumber).TariffId);
+
+
                     decimal tarifPrice = tarifa.Price;
-                    decimal amount = payment.Amount;
+                    decimal amount = Amount;
 
                     int months = Convert.ToInt32(amount / tarifPrice);
 
+                    Payment payment = new Payment()
+                    {
+                        Client = ClientId,
+                        Date = DateTime.Now,
+                        Amount = Amount
+                    };
                     validity = validity.AddMonths(months);
-                    payment.Date = DateTime.Now;
                     context.Payments.Add(payment);
 
                     context.Clients.FirstOrDefault(c => c.IDNumber == payment.Client).Validity = validity;

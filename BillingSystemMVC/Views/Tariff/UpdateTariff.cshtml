@@ -7,6 +7,24 @@
 
 <h1>Промени тарифа</h1>
 
+<style>
+
+    .row .col-md-4 .form-group {
+        border: 1px solid;
+        border-radius: 7px;
+        text-indent: initial;
+        padding: 10px;
+        width: 95%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+        margin-bottom: 0rem;
+    }
+
+    body .form-group {
+        background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+    }
+</style>
 
 <div class="row">
     <div class="col-md-4">
@@ -14,25 +32,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" name="Name" value="@Model.Name"/>
+                <input asp-for="Name" class="form-control" name="Name" value="@Model.Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" name="Price" value="@Model.Price"/>
+                <input asp-for="Price" class="form-control" name="Price" value="@Model.Price" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InternetSpeed" class="control-label"></label>
-                <input asp-for="InternetSpeed" class="form-control" name="InternetSpeed" value="@Model.InternetSpeed"/>
+                <input asp-for="InternetSpeed" class="form-control" name="InternetSpeed" value="@Model.InternetSpeed" />
                 <span asp-validation-for="InternetSpeed" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label type="hidden" asp-for="IDNumber" class="control-label"></label>
-                <input asp-for="IDNumber" class="form-control" name="IDNumber" value="@Model.IDNumber"/>
+                <input asp-for="IDNumber" class="form-control" name="IDNumber" value="@Model.IDNumber" />
                 <span asp-validation-for="IDNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="btn">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

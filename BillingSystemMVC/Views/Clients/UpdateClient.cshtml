@@ -8,6 +8,24 @@
 
 <h4>Клиент</h4>
 <hr />
+<style>
+
+    .row .col-md-4 .form-group {
+        border: 1px solid;
+        border-radius: 7px;
+        text-indent: initial;
+        padding: 10px;
+        width: 95%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+        margin-bottom: 0rem;
+
+    }
+    body .form-group {
+        background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+    }
+</style>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="UpdateClient">
@@ -57,10 +75,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="IDNumber" class="control-label"></label>
-                <input type="hidden" asp-for="IDNumber" class="form-control" />
+                <input type="hidden" asp-for="IDNumber" class="form-control"/>
                 <span asp-validation-for="IDNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="btn">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

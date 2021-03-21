@@ -7,45 +7,66 @@
 
 <h1>Информация за зоната</h1>
 
+<style>
+    .zone-table tr td {
+        border: 1px solid black;
+        text-indent: initial;
+        padding: 5px;
+        width: 50%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+    }
+
+    tr {
+        height: 30px;
+    }
+
+    body .zone-table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+    }
+</style>
+
 <div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Town)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Town)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Owner)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Owner)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tariff)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tariff)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkingIPAdresses)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkingIPAdresses)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDNumber)
-        </dd>
-    </dl>
+    <table class="zone-table">
+        <tr class="zone-row">
+            <td class="zone-header">
+                @Html.DisplayNameFor(model => model.Town)
+            </td>
+            <td class="zone-detail">
+                @Html.DisplayFor(model => model.Town)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Owner)</td>
+            <td>@Html.DisplayFor(model => model.Owner)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Tariff)</td>
+            <td>@Html.DisplayFor(model => model.Tariff)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.WorkingIPAdresses)</td>
+            <td>@Html.DisplayFor(model => model.WorkingIPAdresses)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.IDNumber)</td>
+            <td>@Html.DisplayFor(model => model.IDNumber)</td>
+        </tr>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Промени зона", "UpdateZone", "Zone", new { IDNumber = Model.IDNumber }) |
     @using (Html.BeginForm("DeleteZone", "Zone", new { IDNumber = Model.IDNumber }))
     {
+        <style>
+            body input {
+                background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+                border-radius: 7px;
+            }
+        </style>
         <input type="submit" value="Изтрий зоната"
                onclick="return confirm('Сигурен ли сте,че искате да изтриете зоната?');" />
     }

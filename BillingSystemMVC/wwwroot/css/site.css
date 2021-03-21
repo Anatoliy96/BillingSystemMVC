@@ -16,8 +16,6 @@ a {
 }
 
 .btn-primary {
-    background: rgb(123,186,255);
-    background: linear-gradient(90deg, rgba(123,186,255,1) 0%, rgba(208,230,255,1) 51%, rgba(123,186,255,1) 100%) !important;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }

@@ -7,34 +7,59 @@
 
 <h1>Детайли за профила</h1>
 
+<style>
+    .profile-table tr td {
+        border: 1px solid black;
+        text-indent: initial;
+        padding: 5px;
+        width: 50%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+    }
+
+    tr {
+        height: 30px;
+    }
+
+    body .profile-table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+    }
+</style>
+
 <div>
     <h4>Профил</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDNumber)
-        </dd>
-    </dl>
+    <table class="profile-table">
+        <tr class="zone-row">
+            <td class="zone-header">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </td>
+            <td class="zone-detail">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.IDNumber)</td>
+            <td>@Html.DisplayFor(model => model.IDNumber)</td>
+        </tr>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Промени профил", "UpdateProfile", "Profile", new { IDNumber = Model.IDNumber }) |
     @using (Html.BeginForm("DeleteProfile", "Profile", new { IDNumber = Model.IDNumber }))
     {
+        <style>
+            body input {
+                background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+                border-radius: 7px;
+            }
+        </style>
         <input type="submit" value="Изтрий профила"
                onclick="return confirm('Сигурен ли сте,че искате да изтриете профила?');" />
     }

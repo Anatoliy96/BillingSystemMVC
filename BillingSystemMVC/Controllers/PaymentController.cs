@@ -18,19 +18,19 @@ namespace BillingSystemMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register(int ClientId)
+        public IActionResult Register()
         {
-            Payment pay = new Payment();
-            pay.Client = ClientId;
-            return View(pay);
+            ClientsDao dao = new ClientsDao();
+
+            return View(dao.GetAll());
         }
 
 
         [HttpPost]
-        public IActionResult Register(Payment payment)
+        public IActionResult Register(int ClientId, decimal Amount)
         {
             PaymentBLL paymentBLL = new PaymentBLL();
-            paymentBLL.RegisterPayment(payment);
+            paymentBLL.RegisterPayment(ClientId, Amount);
             return RedirectToAction("Index", "Clients");
         }
     }

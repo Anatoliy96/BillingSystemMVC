@@ -5,6 +5,24 @@
 }
 
 <h1>UpdateProfile</h1>
+<style>
+
+    .row .col-md-4 .form-group {
+        border: 1px solid;
+        border-radius: 7px;
+        text-indent: initial;
+        padding: 10px;
+        width: 95%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+        margin-bottom: 0rem;
+    }
+
+    body .form-group {
+        background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+    }
+</style>
 
 <h4>Профил</h4>
 <hr />
@@ -24,9 +42,10 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="hidden" asp-for="IDNumber" class="form-control" name="IDNumber" />
+            <label asp-for="IDNumber" class="control-label"></label>
+            <input type="hidden" asp-for="IDNumber" class="form-control" name="IDNumber" value="@Model.IDNumber" />
         </div>
-        <div class="form-group">
+        <div class="btn">
             <input type="submit" value="Save" class="btn btn-primary" />
         </div>
         }
