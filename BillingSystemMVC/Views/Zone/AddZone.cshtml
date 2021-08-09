@@ -4,6 +4,30 @@
 }
 
 <h1>Добави Зона</h1>
+
+<style>
+    .form-group {
+        border: 1px solid;
+        border-radius: 7px;
+        text-indent: initial;
+        padding: 10px;
+        width: 50%;
+        text-align: left;
+        font-size: 100%;
+        font-family: Verdana, sans-serif;
+        margin-bottom: 0rem;
+    }
+
+    .btn {
+        margin: 5px;
+    }
+
+    body .form-group {
+        background: rgb(238,174,202);
+        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    }
+</style>
+
 @using (Html.BeginForm("AddZone", "Zone"))
 {
     <div class="form-group">

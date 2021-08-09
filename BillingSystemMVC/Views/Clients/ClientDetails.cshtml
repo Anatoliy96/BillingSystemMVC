@@ -24,8 +24,8 @@
         body .client-table {
             margin-top: 10px;
             margin-bottom: 10px;
-            background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
-            
+            background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
         }
     </style>
 
@@ -86,8 +86,9 @@
         @using (Html.BeginForm("DeleteClient", "Clients", new { IDNumber = Model.IDNumber }))
         {
             <style>
-                body input{
-                    background: linear-gradient(to bottom, #99ff66 0%, #ff99cc 98%);
+                body input {
+                    background: rgb(238,174,202);
+                    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
                     border-radius: 7px;
                 }
             </style>

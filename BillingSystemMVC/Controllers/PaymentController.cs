@@ -27,10 +27,13 @@ namespace BillingSystemMVC.Controllers
 
 
         [HttpPost]
-        public IActionResult Register(int ClientId, decimal Amount)
+        public IActionResult Register(string ClientName, decimal Amount)
         {
             PaymentBLL paymentBLL = new PaymentBLL();
-            paymentBLL.RegisterPayment(ClientId, Amount);
+            if (paymentBLL.RegisterPayment(ClientName, Amount) == null)
+            {
+                return RedirectToAction("Register");
+            }
             return RedirectToAction("Index", "Clients");
         }
     }

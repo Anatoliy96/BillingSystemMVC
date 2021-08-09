@@ -84,9 +84,16 @@ namespace BillingSystemMVC.BLL
                 .FirstOrDefault(c => c.IDNumber == ID);
 
             ClientStatusDTO clientDto = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(client);
-            
+            if (clientDto.Validity >= DateTime.Now)
+            {
+                clientDto.Status = "ACTIVE";
+            }
+            else
+            {
+                clientDto.Status = "INACTIVE";
+            }
 
-           return clientDto;
+            return clientDto;
         }
         public enum ClientFilterType
         {
@@ -478,8 +485,13 @@ namespace BillingSystemMVC.BLL
 
         public List<ClientStatusDTO> GetActiveClients()
         {
+            return GetClientStatusDTOs().Where(c => c.Status == "ACTIVE").ToList();
+
+        }
+
+        private List<ClientStatusDTO> GetClientStatusDTOs()
+        {
             BillingSystemContext context = new BillingSystemContext();
-            context.Clients.Where(c => c.Validity >= DateTime.Now).ToList();
 
             List<Client> clients = context
                 .Clients.Include(c => c.ClientTarif)
@@ -490,7 +502,7 @@ namespace BillingSystemMVC.BLL
             foreach (Client c in clients)
             {
                 ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-               
+
 
                 if (newClient.Validity >= DateTime.Now)
                 {
@@ -504,37 +516,11 @@ namespace BillingSystemMVC.BLL
             }
 
             return clientsDTO;
-
         }
 
         public List<ClientStatusDTO> GetInActiveClients()
         {
-            BillingSystemContext context = new BillingSystemContext();
-            context.Clients.Where(c => c.Validity < DateTime.Now).ToList();
-
-            List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-            List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-            foreach (Client c in clients)
-            {
-                ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-                
-
-                if (newClient.Validity >= DateTime.Now)
-                {
-                    newClient.Status = "ACTIVE";
-                }
-                else
-                {
-                    newClient.Status = "INACTIVE";
-                }
-                clientsDTO.Add(newClient);
-            }
-
-            return clientsDTO;
+            return GetClientStatusDTOs().Where(c => c.Status == "INACTIVE").ToList();
         }
 
         public List<Client> GetExpiringClients()

@@ -18,32 +18,37 @@ namespace BillingSystemMVC.BLL
             return context.Payments.Where(p => p.Date >= From && p.Date <= To).ToList();
         }
 
-        public Payment RegisterPayment(int ClientId, decimal Amount)
+        public Payment RegisterPayment(string ClientName, decimal Amount)
         {
             try
             {
                 using (BillingSystemContext context = new BillingSystemContext())
                 {
-                    DateTime validity = context.Clients.FirstOrDefault(c => c.IDNumber == ClientId).Validity;
+                    Client client = context.Clients.Include(c => c.ClientTarif).FirstOrDefault(c => c.Name == ClientName);
+                    if (client == null)
+                    {
+                        return null;
+                    }
+                    DateTime validity = client.Validity;
                     
 
-                    Tariff tarif = context.Clients
-                        .Include(c => c.ClientTarif)
-                        .FirstOrDefault(c => c.IDNumber == ClientId).ClientTarif;
+                    //Tariff tarif = context.Clients
+                    //    .Include(c => c.ClientTarif)
+                    //    .FirstOrDefault(c => c.IDNumber == ClientId).ClientTarif;
                     
-                    Tariff tarifa = context.Tariffs
-                        .FirstOrDefault(
-                        t => t.IDNumber == context.Clients.FirstOrDefault(c => c.TariffId == t.IDNumber).TariffId);
+                    //Tariff tarifa = context.Tariffs
+                    //    .FirstOrDefault(
+                    //    t => t.IDNumber == context.Clients.FirstOrDefault(c => c.TariffId == t.IDNumber).TariffId);
 
 
-                    decimal tarifPrice = tarifa.Price;
+                    decimal tarifPrice = client.ClientTarif.Price;
                     decimal amount = Amount;
 
                     int months = Convert.ToInt32(amount / tarifPrice);
 
                     Payment payment = new Payment()
                     {
-                        Client = ClientId,
+                        Client = client.IDNumber,
                         Date = DateTime.Now,
                         Amount = Amount
                     };
