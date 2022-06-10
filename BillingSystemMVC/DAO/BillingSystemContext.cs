@@ -22,7 +22,7 @@ namespace BillingSystemMVC.DAO
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("Server=localhost;Database=billing_system;Uid=root;Pwd=root");
+            optionsBuilder.UseSqlServer("Server =DESKTOP-7TAP9Q7\\SQLEXPRESS;Database=billing_system; Trusted_Connection = True; ");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

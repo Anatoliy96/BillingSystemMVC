@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace BillingSystemMVC
 {
@@ -36,7 +35,7 @@ namespace BillingSystemMVC
                  .AddCookie("CookieAuthentication", config =>
                  {
                      config.Cookie.Name = "UserLoginCookie";
-                     config.LoginPath = "/Login/UserLogin";
+                     config.LoginPath = "/Home/Login";
                  });
             
 
@@ -44,7 +43,7 @@ namespace BillingSystemMVC
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDbContext<BillingSystemContext>(options => {
-                options.UseMySQL("Server=127.0.0.1;Database=billing_system;Uid=root;Pwd=root");
+                options.UseSqlServer("Server=DESKTOP-7TAP9Q7\\SQLEXPRESS; Database=billing_system; Trusted_Connection = True;");
                 });
 
             

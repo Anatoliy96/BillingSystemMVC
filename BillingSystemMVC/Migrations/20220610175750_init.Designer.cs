@@ -3,21 +3,26 @@ using System;
 using BillingSystemMVC.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+#nullable disable
 
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    [Migration("20201218073715_payment")]
-    partial class payment
+    [Migration("20220610175750_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("BillingSystemMVC.Model.CashRegister", b =>
                 {
@@ -25,8 +30,10 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<string>("Adress")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IDNumber");
 
@@ -39,32 +46,31 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<string>("Adress")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IPAdress")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Included")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TariffId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Validity")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ZoneId")
                         .HasColumnType("int");
@@ -78,26 +84,41 @@ namespace BillingSystemMVC.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("BillingSystemMVC.Model.Payment", b =>
+                {
+                    b.Property<int>("IDNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Client")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("IDNumber");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("BillingSystemMVC.Model.Profile", b =>
                 {
                     b.Property<int>("IDNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
 
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserNameType")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IDNumber");
 
@@ -110,8 +131,10 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<string>("RollName")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IDNumber");
 
@@ -124,11 +147,13 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<int>("InternetSpeed")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -143,6 +168,8 @@ namespace BillingSystemMVC.Migrations
                     b.Property<int>("IDNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
 
                     b.Property<int>("RoleID")
                         .HasColumnType("int");
@@ -161,21 +188,26 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<string>("ConfirmPassword")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IDNumber");
 
@@ -188,17 +220,19 @@ namespace BillingSystemMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
                     b.Property<string>("Owner")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tariff")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Town")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkingIPAdresses")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IDNumber");
 
@@ -218,6 +252,20 @@ namespace BillingSystemMVC.Migrations
                         .HasForeignKey("ZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClientTarif");
+
+                    b.Navigation("ClientZone");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.Tariff", b =>
+                {
+                    b.Navigation("Clients");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.Zone", b =>
+                {
+                    b.Navigation("Clients");
                 });
 #pragma warning restore 612, 618
         }

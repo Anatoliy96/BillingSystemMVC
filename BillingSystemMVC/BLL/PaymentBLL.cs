@@ -1,5 +1,4 @@
 ﻿using BillingSystemMVC.DAO;
-using BillingSystemMVC.Migrations;
 using BillingSystemMVC.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
