@@ -31,6 +31,13 @@ namespace BillingSystemMVC.BLL
             return tariffs;
         }
 
+        public List<Tariff> GetTariffCount()
+        {
+            TariffDao tariffDao=new TariffDao();
+
+            return tariffDao.GetAll().ToList();
+        }
+
         public void Add(
             string Name,
             int Price,

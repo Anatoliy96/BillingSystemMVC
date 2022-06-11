@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BillingSystemMVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using BillingSystemMVC.BLL.BLO;
 
 namespace BillingSystemMVC.Controllers
 {
@@ -18,7 +19,8 @@ namespace BillingSystemMVC.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                ViewModelCount viewModelCount = new ViewModelCount();
+                return View(viewModelCount.GetViewModels());
             }
             else
             {

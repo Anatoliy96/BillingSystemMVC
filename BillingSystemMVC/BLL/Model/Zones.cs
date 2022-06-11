@@ -1,4 +1,5 @@
-﻿using BillingSystemMVC.Model;
+﻿using BillingSystemMVC.DAO;
+using BillingSystemMVC.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace BillingSystemMVC.BLL.Model
     public class Zones
     {
         public List<Zone> zones { get; set; }
+
     }
 }

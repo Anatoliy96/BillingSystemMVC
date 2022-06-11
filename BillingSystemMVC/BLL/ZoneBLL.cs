@@ -30,6 +30,12 @@ namespace BillingSystemMVC.BLL
             return zones;
         }
 
+        public List<Zone> GetZonesCount()
+        {
+            ZoneDao zoneDao =new ZoneDao();
+            return zoneDao.GetAll().ToList();
+        }
+
         public void Add(
             string Town,
             string Owner)
