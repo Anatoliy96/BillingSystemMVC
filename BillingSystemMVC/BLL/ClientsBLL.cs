@@ -139,6 +139,14 @@ namespace BillingSystemMVC.BLL
             };
             ClientsDao dao = new ClientsDao();
             dao.Insert(client);
+            ClientLog log = new ClientLog()
+            {
+                ClientId = client.IDNumber,
+                Date = DateTime.Now,
+                Text = "Client created"
+            };
+            ClientLogDao clientLog = new ClientLogDao();
+            clientLog.Insert(log);
         }
 
         public List<ClientStatusDTO> GetFilteredClients(ClientFilterType FilterType, string Filter)
@@ -146,149 +154,23 @@ namespace BillingSystemMVC.BLL
 
             if (FilterType == ClientFilterType.Name)
             {
-                BillingSystemContext context = new BillingSystemContext();
-                List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-                foreach (Client c in clients)
-                {
-                    ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-
-                    if (newClient.Validity >= DateTime.Now)
-                    {
-                        newClient.Status = "ACTIVE";
-                    }
-                    else
-                    {
-                        newClient.Status = "INACTIVE";
-                    }
-                    clientsDTO.Add(newClient);
-                }
-                FilterByName(Filter);
-                return clientsDTO;
-                
+                return FilterByName(Filter); 
             }
             else if (FilterType == ClientFilterType.Address)
             {
-                BillingSystemContext context = new BillingSystemContext();
-
-                List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-
-                foreach (Client c in clients)
-                {
-                    ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-                    
-
-                    if (newClient.Validity >= DateTime.Now)
-                    {
-                        newClient.Status = "ACTIVE";
-                    }
-                    else
-                    {
-                        newClient.Status = "INACTIVE";
-                    }
-                    clientsDTO.Add(newClient);
-                }
-                FilterByAddress(Filter);
-                return clientsDTO;
+                return FilterByAddress(Filter);
             }
             else if (FilterType == ClientFilterType.PhoneNumber)
             {
-                BillingSystemContext context = new BillingSystemContext();
-
-                List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-
-                foreach (Client c in clients)
-                {
-                    ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-                    
-
-                    if (newClient.Validity >= DateTime.Now)
-                    {
-                        newClient.Status = "ACTIVE";
-                    }
-                    else
-                    {
-                        newClient.Status = "INACTIVE";
-                    }
-                    clientsDTO.Add(newClient);
-                }
-                FilterByPhoneNumber(Filter);
-                return clientsDTO;
-                
+                return FilterByPhoneNumber(Filter);
             }
             else if (FilterType == ClientFilterType.IPAdress)
             {
-                BillingSystemContext context = new BillingSystemContext();
-
-                List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-
-                foreach (Client c in clients)
-                {
-                    ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-                    
-
-                    if (newClient.Validity >= DateTime.Now)
-                    {
-                        newClient.Status = "ACTIVE";
-                    }
-                    else
-                    {
-                        newClient.Status = "INACTIVE";
-                    }
-                    clientsDTO.Add(newClient);
-                }
-                FilterByIPAdress(Filter);
-                return clientsDTO;
-                
+                return FilterByIPAdress(Filter);
             }
             else if (FilterType == ClientFilterType.comment)
             {
-                BillingSystemContext context = new BillingSystemContext();
-
-                List<Client> clients = context
-                .Clients.Include(c => c.ClientTarif)
-                .Include(c => c.ClientZone)
-                .ToList();
-
-                List<ClientStatusDTO> clientsDTO = new List<ClientStatusDTO>();
-
-                foreach (Client c in clients)
-                {
-                    ClientStatusDTO newClient = (ClientStatusDTO)ModelToDto<ClientStatusDTO>(c);
-                    
-
-                    if (newClient.Validity >= DateTime.Now)
-                    {
-                        newClient.Status = "ACTIVE";
-                    }
-                    else
-                    {
-                        newClient.Status = "INACTIVE";
-                    }
-                    clientsDTO.Add(newClient);
-                }
-                FilterByComment(Filter);
-                return clientsDTO;
-                
+                return FilterByComment(Filter);
             }
             throw new InvalidEnumArgumentException("No such filter type.");
         }
@@ -471,9 +353,10 @@ namespace BillingSystemMVC.BLL
             
             
             dao.Update(client);
-            
-
+            ClientLog clientLog = new ClientLog();
         }
+
+
 
         public void DeleteClient(int IDNumber)
         {

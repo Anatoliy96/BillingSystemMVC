@@ -8,6 +8,5 @@ namespace BillingSystemMVC.Model
     public class CashRegister : ID
     {
         public string Adress { get; set; }
-
     }
 }

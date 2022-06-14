@@ -41,6 +41,7 @@ namespace BillingSystemMVC.DAO
         public DbSet<Users> Users { get; set; }
         public DbSet<RoleMaster> RoleMasters { get; set; }
         public DbSet<UserRoleMapping> UserRoleMappings { get; set; }
+        public DbSet<ClientLog> ClientLog { get; set; }
 
     }
 }
