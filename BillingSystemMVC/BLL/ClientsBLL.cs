@@ -142,8 +142,9 @@ namespace BillingSystemMVC.BLL
             ClientLog log = new ClientLog()
             {
                 ClientId = client.IDNumber,
+                ClientName = client.Name,
                 Date = DateTime.Now,
-                Text = "Client created"
+                Text = "Добавен клиент"
             };
             ClientLogDao clientLog = new ClientLogDao();
             clientLog.Insert(log);
@@ -324,39 +325,64 @@ namespace BillingSystemMVC.BLL
         }
 
         public void UpdateClient(
-            string Name,
-            string Adress,
-            string PhoneNumber,
-            int Tariff,
-            int Zone,
-            string PonClient,
-            string Comment,
-            int IDNumber)
+            ClientEditDTO clientDto)
         {
             ClientsDao dao = new ClientsDao();
 
-            Client oldClient = dao.Details(IDNumber);
+            Client oldClient = dao.Details(clientDto.IDNumber);
+
 
             Client client = new Client()
 
             {
-                Name = Name,
-                Adress = Adress,
-                PhoneNumber = PhoneNumber,
-                ZoneId = Tariff,
-                TariffId = Zone,
-                Comment = Comment,
-                IDNumber = IDNumber,
+                Name = clientDto.Name,
+                Adress = clientDto.Adress,
+                PhoneNumber = clientDto.PhoneNumber,
+                ZoneId = clientDto.ZoneId,
+                TariffId = clientDto.TariffId,
+                Comment = clientDto.Comment,
+                IDNumber = clientDto.IDNumber,
                 Validity = oldClient.Validity,
                 Included = oldClient.Included
             };
-            
-            
-            dao.Update(client);
+            // Put in logs
             ClientLog clientLog = new ClientLog();
+            clientLog.Text = string.Join("\n", GetChanges(oldClient, client));
+            clientLog.Date = DateTime.Now;
+            clientLog.ClientId = clientDto.IDNumber;
+            clientLog.ClientName = clientDto.Name;
+            ClientLogDao clientLogDao = new ClientLogDao();
+            clientLogDao.Insert(clientLog);
+
+            dao.Update(client);
+            
         }
 
-
+        private List<string> GetChanges(Client oldCLient, Client newClient)
+        {
+            List<string> changes = new List<string>();
+            if (oldCLient.Name != newClient.Name)
+            {
+                changes.Add($"Имената са променени от {oldCLient.Name} на {newClient.Name}.");
+            }
+            if (oldCLient.Adress != newClient.Adress)
+            {
+                changes.Add($"Адреса на клиента е променрн от {oldCLient.Adress} на {newClient.Adress}.");
+            }
+            if (oldCLient.PhoneNumber != newClient.PhoneNumber)
+            {
+                changes.Add($"Телефонният номер на клиента е променен от {oldCLient.PhoneNumber} на {newClient.PhoneNumber}.");
+            }
+            if (oldCLient.ZoneId != newClient.ZoneId)
+            {
+                changes.Add($"Зоната на клиента е променен от {oldCLient.ZoneId} на {newClient.ZoneId}.");
+            }
+            if (oldCLient.TariffId != newClient.TariffId)
+            {
+                changes.Add($"Тарифата на клиента е променен от {oldCLient.TariffId} на {newClient.TariffId}.");
+            }
+            return changes;
+        }
 
         public void DeleteClient(int IDNumber)
         {

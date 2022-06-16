@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ZoneId" class="control-label">Зона</label>
-                <select name="ZoneId">
+                <select asp-for="ZoneId" name="ZoneId">
                     @foreach (var z in Model.ChooseZonesAndTariffs.Zones)
                     {
                         <option name="ZoneId" value="@z.IDNumber">@z.Town</option>
@@ -64,7 +64,7 @@
 
             <div class="form-group">
                 <label asp-for="TariffId" class="control-label">Тарифа</label>
-                <select name="TariffId">
+                <select asp-for="TariffId" name="TariffId">
                     @foreach (var t in Model.ChooseZonesAndTariffs.Tariffs)
                     {
                         <option name="TariffId" value="@t.IDNumber">@t.Name</option>

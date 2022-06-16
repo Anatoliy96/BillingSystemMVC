@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BillingSystemMVC.Model.ClientLog>
+
+@{
+    ViewData["Title"] = "GetClientChanges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetClientChanges</h1>
+
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Номер</th>
+                <th scope="col">Номер Клиент</th>
+                <th scope="col">Име на Клиент</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+            <tr>
+                <td>@c.IDNumber</td>
+                <td>@c.ClientId</td>
+                <td>@c.ClientName</td>
+                <td>@c.Date</td>
+                <td>@c.Text</td>
+            </tr>
+            }
+           
+        </tbody>
+    </table>
+

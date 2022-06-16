@@ -82,7 +82,7 @@
 </div>
     <div>
         @Html.ActionLink("Редактиране", "UpdateClient", "Clients", new { IDNumber = Model.IDNumber })
-        |
+        |@Html.ActionLink("История на клиента", "GetClientChanges", "Clients", new { IDNumber = Model.IDNumber })
         @using (Html.BeginForm("DeleteClient", "Clients", new { IDNumber = Model.IDNumber }))
         {
             <style>

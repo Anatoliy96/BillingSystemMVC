@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BillingSystemMVC.BLL;
+using BillingSystemMVC.BLL.BLO;
 using BillingSystemMVC.BLL.Model;
 using BillingSystemMVC.DAO;
 using BillingSystemMVC.Model;
@@ -129,21 +130,22 @@ namespace BillingSystemMVC.Controllers
         [HttpPost]
 
         public IActionResult UpdateClient(
-            string Name,
-            string Adress,
-            string PhoneNumber,
-            int ZoneId,
-            int TariffId,
-            string PonClient,
-            string Comment,
-            int IDNumber)
+            ClientEditDTO client)
         {
 
             ClientsBLL bll = new ClientsBLL();
 
-            bll.UpdateClient(Name, Adress, PhoneNumber, ZoneId, TariffId, PonClient, Comment, IDNumber);
-            return RedirectToAction("ClientDetails", new { ID = IDNumber });
+            bll.UpdateClient(client);
+            return RedirectToAction("ClientDetails", new { ID = client.IDNumber });
 
+        }
+
+        [HttpGet]
+
+        public IActionResult GetClientChanges(int IDNumber)
+        {
+            ClientsLogsBLO clientsLogsBLO = new ClientsLogsBLO();
+            return View(clientsLogsBLO.GetClientByLog(IDNumber));
         }
 
         [HttpPost]

@@ -7,7 +7,7 @@ namespace BillingSystemMVC.Model
     {
         [ForeignKey("Clients")]
         public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public string ClientName { get; set; }
         public DateTime Date { get; set; }
         public string Text { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using BillingSystemMVC.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BillingSystemMVC.DAO
 {
@@ -12,7 +13,8 @@ namespace BillingSystemMVC.DAO
 
         public List<ClientLog> GetAll()
         {
-            throw new System.NotImplementedException();
+            BillingSystemContext context = new BillingSystemContext();
+            return context.ClientLog.ToList();
         }
 
         public void Insert(ClientLog Entity)
