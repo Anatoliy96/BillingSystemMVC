@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    [Migration("20220610175750_init")]
-    partial class init
+    [Migration("20220619070113_string")]
+    partial class @string
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,50 @@ namespace BillingSystemMVC.Migrations
                     b.HasIndex("ZoneId");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.ClientLog", b =>
+                {
+                    b.Property<int>("IDNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IDNumber");
+
+                    b.ToTable("ClientLog");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.IPAdress", b =>
+                {
+                    b.Property<int>("IDNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
+                    b.Property<string>("IPS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IDNumber");
+
+                    b.ToTable("IPS");
                 });
 
             modelBuilder.Entity("BillingSystemMVC.Model.Payment", b =>

@@ -28,7 +28,7 @@
                 <td>@Html.ActionLink(c.Name, "ClientDetails", "Clients", new { id = c.IDNumber })</td>
                 <td>@c.Adress</td>
                 <td>@c.ClientZone.Town</td>
-                <td>@c.IPAdress</td>
+                <td>@string.Join(", ", c.IPS)</td>
                 <td>@c.Validity</td>
                 <td>@c.Status</td>
                 <td>@c.Comment</td>

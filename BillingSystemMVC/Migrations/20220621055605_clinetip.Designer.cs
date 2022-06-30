@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    [Migration("20220614055453_clientLog")]
-    partial class clientLog
+    [Migration("20220621055605_clinetip")]
+    partial class clinetip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,9 @@ namespace BillingSystemMVC.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -103,9 +106,29 @@ namespace BillingSystemMVC.Migrations
 
                     b.HasKey("IDNumber");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("ClientLog");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.IPAdress", b =>
+                {
+                    b.Property<int>("IDNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IPS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IDNumber");
+
+                    b.ToTable("IPS");
                 });
 
             modelBuilder.Entity("BillingSystemMVC.Model.Payment", b =>
@@ -280,17 +303,6 @@ namespace BillingSystemMVC.Migrations
                     b.Navigation("ClientTarif");
 
                     b.Navigation("ClientZone");
-                });
-
-            modelBuilder.Entity("BillingSystemMVC.Model.ClientLog", b =>
-                {
-                    b.HasOne("BillingSystemMVC.Model.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("BillingSystemMVC.Model.Tariff", b =>

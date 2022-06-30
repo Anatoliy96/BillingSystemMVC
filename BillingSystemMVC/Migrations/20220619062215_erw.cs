@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BillingSystemMVC.Migrations
 {
-    public partial class init : Migration
+    public partial class erw : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,36 @@ namespace BillingSystemMVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CashRegisters", x => x.IDNumber);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClientLog",
+                columns: table => new
+                {
+                    IDNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    ClientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientLog", x => x.IDNumber);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IPS",
+                columns: table => new
+                {
+                    IDNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IPS = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IPS", x => x.IDNumber);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +206,13 @@ namespace BillingSystemMVC.Migrations
                 name: "CashRegisters");
 
             migrationBuilder.DropTable(
+                name: "ClientLog");
+
+            migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "IPS");
 
             migrationBuilder.DropTable(
                 name: "Payments");

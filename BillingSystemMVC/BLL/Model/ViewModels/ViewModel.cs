@@ -1,4 +1,7 @@
-﻿namespace BillingSystemMVC.BLL.Model.ViewModel
+﻿using BillingSystemMVC.Model;
+using System.Collections.Generic;
+
+namespace BillingSystemMVC.BLL.Model.ViewModel
 {
     public class ViewModel
     {
@@ -6,5 +9,6 @@
         public int ClientCount { get; set; }
         public int ZoneCount { get; set; }
         public int TarriffCount { get; set; }
+        
     }
 }

@@ -18,6 +18,7 @@ namespace BillingSystemMVC.Model
         public int ZoneId { get; set; }
         public Zone ClientZone { get; set; }
         [Display(Name = "IPAdress")]
+        [ForeignKey("IPAdress")]
         public string IPAdress { get; set; }
         [Display(Name = "Телефон")]
         public string PhoneNumber { get; set; }
@@ -26,7 +27,6 @@ namespace BillingSystemMVC.Model
         [Display(Name = "Коментар")]
         public string Comment { get; set; }
         public DateTime Included { get; set; }
-        
         [ForeignKey("Tariff")]
         [Display(Name = "Тарифа")]
         public int TariffId { get; set; }

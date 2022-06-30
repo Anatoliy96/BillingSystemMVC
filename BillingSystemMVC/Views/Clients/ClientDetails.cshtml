@@ -47,8 +47,8 @@
             <td>@Html.DisplayFor(model => model.ClientZone.Town)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.IPAdress)</td>
-            <td>@Html.DisplayFor(model => model.IPAdress)</td>
+            <td>@Html.DisplayNameFor(model => model.IPS)</td>
+            <td>@Html.DisplayFor(model => model.IPS)</td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.PhoneNumber)</td>
@@ -83,6 +83,7 @@
     <div>
         @Html.ActionLink("Редактиране", "UpdateClient", "Clients", new { IDNumber = Model.IDNumber })
         |@Html.ActionLink("История на клиента", "GetClientChanges", "Clients", new { IDNumber = Model.IDNumber })
+        @Html.ActionLink("IP Адреси", "GetAllIps", "IP", new { IDNumber = Model.IDNumber })
         @using (Html.BeginForm("DeleteClient", "Clients", new { IDNumber = Model.IDNumber }))
         {
             <style>

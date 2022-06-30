@@ -12,7 +12,7 @@ namespace BillingSystemMVC.BLL.Model
         
         public Zone ClientZone { get; set; }
 
-        public string IPAdress { get; set; }
+        public string[] IPS { get; set; }
         
         public Tariff ClientTarif { get; set; }
     }

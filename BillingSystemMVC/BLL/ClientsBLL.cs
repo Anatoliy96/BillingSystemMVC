@@ -60,6 +60,12 @@ namespace BillingSystemMVC.BLL
                 {
                     newClient.Status = "INACTIVE";
                 }
+
+                newClient.IPS = context.IPS
+                    .Where(ip => ip.ClientID == c.IDNumber)
+                    .Select(ip => ip.IPS)
+                    .ToArray();
+
                 clientsDTO.Add(newClient);
             }
 
@@ -130,7 +136,6 @@ namespace BillingSystemMVC.BLL
                 Name = ClientName,
                 Adress = Address,
                 ZoneId = zone,
-                IPAdress = null,
                 PhoneNumber = PhoneNumber,
                 Comment = Comment,
                 Included = DateTime.Now,

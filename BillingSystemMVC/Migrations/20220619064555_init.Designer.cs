@@ -4,6 +4,7 @@ using BillingSystemMVC.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    partial class BillingSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20220619064555_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,8 +54,8 @@ namespace BillingSystemMVC.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IPAdress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("IPAdress")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Included")
                         .HasColumnType("datetime2");
@@ -115,14 +117,11 @@ namespace BillingSystemMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
 
-                    b.Property<int>("ClientID")
-                        .HasColumnType("int");
+                    b.Property<double>("IPS")
+                        .HasColumnType("float");
 
-                    b.Property<string>("IPS")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("IDNumber");
 

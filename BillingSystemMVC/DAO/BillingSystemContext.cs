@@ -42,7 +42,7 @@ namespace BillingSystemMVC.DAO
         public DbSet<RoleMaster> RoleMasters { get; set; }
         public DbSet<UserRoleMapping> UserRoleMappings { get; set; }
         public DbSet<ClientLog> ClientLog { get; set; }
-
+        public DbSet<IPAdress> IPS { get; set; }
     }
 }
     

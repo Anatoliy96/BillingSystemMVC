@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystemMVC.Migrations
 {
     [DbContext(typeof(BillingSystemContext))]
-    [Migration("20220616194242_newLog")]
-    partial class newLog
+    [Migration("20220619065213_byte")]
+    partial class @byte
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,8 +54,8 @@ namespace BillingSystemMVC.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IPAdress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("IPAdress")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime>("Included")
                         .HasColumnType("datetime2");
@@ -107,6 +107,25 @@ namespace BillingSystemMVC.Migrations
                     b.HasKey("IDNumber");
 
                     b.ToTable("ClientLog");
+                });
+
+            modelBuilder.Entity("BillingSystemMVC.Model.IPAdress", b =>
+                {
+                    b.Property<int>("IDNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDNumber"), 1L, 1);
+
+                    b.Property<byte>("IPS")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IDNumber");
+
+                    b.ToTable("IPS");
                 });
 
             modelBuilder.Entity("BillingSystemMVC.Model.Payment", b =>
